@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Scent Lab — Plan & Projections</title><style>
+@page{margin:0;size:A4 landscape}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,Helvetica,Arial,sans-serif;background:#0a0a0f;color:#e0e0e0}
+.page{width:277mm;min-height:186mm;position:relative;overflow:visible;page-break-after:always;display:flex;flex-direction:column;padding:16mm 18mm}
+@media screen{.page{margin:12px auto;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.6)}}
+.cover{align-items:center;justify-content:center;text-align:center}
+.pill{display:inline-block;padding:5px 16px;background:rgba(99,102,241,.15);border-radius:50px;color:#818cf8;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+h1{font-size:48px;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:20px}
+h1 span{background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tagline{font-size:16px;color:#888;font-weight:300;margin-bottom:28px}
+.line{width:50px;height:3px;background:linear-gradient(90deg,#6366f1,#c084fc);border-radius:2px;margin:16px auto}
+h2{font-size:28px;font-weight:700;color:#fff;letter-spacing:-.5px;margin-bottom:4px}
+h2 span{background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{font-size:11px;color:#666;margin-bottom:12px}
+.row{display:flex;gap:14px;margin-bottom:8px}
+.col{flex:1}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.box{background:rgba(255,255,255,.03);border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.box h3{font-size:12px;font-weight:600;color:#fff;margin-bottom:5px}
+.box p{font-size:10px;color:#999;line-height:1.4}
+.box ul{list-style:none;padding:0}
+.box ul li{padding:2px 0 2px 13px;position:relative;font-size:10px;color:#999;line-height:1.35}
+.box ul li::before{content:"";position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:#6366f1}
+.box.g{background:rgba(52,211,153,.04)}
+.box.y{background:rgba(251,191,36,.04)}
+.box.b{background:rgba(99,102,241,.04)}
+.stats{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.stat{flex:1;min-width:70px;background:rgba(255,255,255,.03);border-radius:7px;padding:8px;text-align:center}
+.stat .num{font-size:18px;font-weight:700;color:#fff}
+.stat .lbl{font-size:8px;color:#666;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+table{width:100%;border-collapse:collapse;font-size:8.5px}
+th{text-align:left;padding:3px 5px;border-bottom:1px solid rgba(255,255,255,.06);color:#888;font-weight:500;text-transform:uppercase;font-size:7.5px;letter-spacing:.5px}
+td{padding:3px 5px;border-bottom:1px solid rgba(255,255,255,.03);color:#ccc;font-size:8.5px}
+.pos{color:#34d399;font-weight:600}
+.neg{color:#f87171}
+.neu{color:#fbbf24}
+.bar{display:flex;align-items:center;margin-bottom:3px;gap:5px}
+.bl{width:80px;font-size:8px;color:#999;flex-shrink:0}
+.bt{flex:1;height:10px;background:rgba(255,255,255,.03);border-radius:3px}
+.bf{height:100%;border-radius:3px;background:linear-gradient(90deg,#6366f1,#818cf8)}
+.bf.g{background:linear-gradient(90deg,#059669,#34d399)}
+.bf.a{background:linear-gradient(90deg,#d97706,#fbbf24)}
+.bf.p{background:linear-gradient(90deg,#7c3aed,#c084fc)}
+.bv{width:35px;font-size:8px;color:#888;text-align:right}
+.footer{position:absolute;bottom:4mm;left:18mm;right:18mm;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.04);padding-top:5px;font-size:7px;color:#444}
+.ps{display:flex;gap:12px;margin-bottom:10px}
+.ps>div{flex:1;border-radius:8px;padding:10px 12px}
+.ps-l{background:rgba(239,68,68,.03)}
+.ps-l h3{color:#fca5a5;font-size:12px;font-weight:700;margin-bottom:5px}
+.ps-r{background:rgba(52,211,153,.03)}
+.ps-r h3{color:#34d399;font-size:12px;font-weight:700;margin-bottom:5px}
+.ps .icon{font-size:18px;margin-bottom:4px}
+.ps ul{list-style:none;padding:0}
+.ps ul li{padding:2px 0 2px 12px;position:relative;font-size:9.5px}
+.ps-l ul li::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:#ef4444}
+.ps-r ul li::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:#34d399}
+.bignum{font-size:30px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center}
+.c1{background:linear-gradient(135deg,#0f0f1a,#1a0a2e 40%,#0f1922)}
+.c2{background:linear-gradient(135deg,#0a0a12,#0f0f1a 50%,#1a0a2e)}
+.c3{background:linear-gradient(135deg,#0f1922,#0a0a12 50%,#1a0a2e)}
+.c4{background:linear-gradient(135deg,#0a0a12,#1a0a2e 50%,#0f1922)}
+</style></head><body>
+<div class="page c1 cover">
+<div class="pill">Personal Project Plan</div>
+<div style="font-size:20px;color:#666;font-weight:300;margin-bottom:6px">&#x1F9F4;</div>
+<h1>SCENT <span>LAB</span></h1>
+<div class="tagline">The First Smart Fragrance Collection Manager<br>with AI-Powered Layering Engine</div>
+<div class="line"></div>
+<div class="stats" style="max-width:550px;margin:0 auto">
+<div class="stat"><div class="num">46M+</div><div class="lbl">Fragrantica Users/mo</div></div>
+<div class="stat"><div class="num">800K+</div><div class="lbl">My Following</div></div>
+<div class="stat"><div class="num">88</div><div class="lbl">Verified Scents</div></div>
+<div class="stat"><div class="num">$60B+</div><div class="lbl">Global Market</div></div>
+</div>
+<div style="margin-top:28px;font-size:9px;color:#555">@umarnaq &bull; August 2026</div>
+<div class="footer"><span>SCENT LAB</span><span class="page">1 / 8</span></div>
+</div>
+<div class="page c2">
+<h2>The <span>Goal</span></h2>
+<div class="sub">Build the app the fragrance community deserves — and turn it into a sustainable business.</div>
+<div class="ps">
+<div class="ps-l">
+<div class="icon">&#x1F62B;</div>
+<h3>What Exists Now</h3>
+<ul>
+<li><strong>Fragrantica/Parfumo</strong> — massive databases, but collection features are web-only, clunky</li>
+<li><strong>No real mobile app</strong> — the "apps" are wrapped websites with terrible UX</li>
+<li><strong>No layering engine</strong> — thousands of forum posts, zero algorithmic answers</li>
+<li><strong>Spreadsheets</strong> — most collectors use Google Sheets/Notes. Manual, no intelligence</li>
+<li><strong>Clone tracking</strong> — zero support for the exploding clone/alternative market</li>
+</ul>
+</div>
+<div class="ps-r">
+<div class="icon">&#x1F3AF;</div>
+<h3>What ScentLab Will Be</h3>
+<ul>
+<li><strong>Mobile-first collection manager</strong> — native iOS app with proper UX</li>
+<li><strong>AI Layering Engine</strong> — pick 2+ fragrances, get compatibility with reasoning</li>
+<li><strong>500+ pre-loaded fragrances</strong> — designer, niche, clones, searchable</li>
+<li><strong>Clone tracking</strong> — see all alternatives for any designer scent</li>
+<li><strong>Creator mode</strong> — shareable collection screenshots for TikTok</li>
+<li><strong>Cloud sync</strong> — across iPhone, iPad, Android, and web</li>
+</ul>
+</div>
+</div>
+<div class="box b" style="font-size:9px;text-align:center;padding:8px 12px">&#x2705; <strong>Working prototype exists</strong> — 88 verified fragrances, search/filter UI, functional layering engine.</div>
+<div class="footer"><span>SCENT LAB</span><span class="page">2 / 8</span></div>
+</div>
+<div class="page c3">
+<h2>The <span>Market</span></h2>
+<div class="sub">46M monthly fragrance enthusiasts — and zero dedicated apps.</div>
+<div class="row">
+<div class="col">
+<div class="stats">
+<div class="stat"><div class="num">46.1M</div><div class="lbl">Monthly Visits</div></div>
+<div class="stat"><div class="num" style="color:#34d399">+4.7%</div><div class="lbl">MoM Growth</div></div>
+<div class="stat"><div class="num">#999</div><div class="lbl">Global Rank</div></div>
+<div class="stat"><div class="num">#5</div><div class="lbl">Beauty Category</div></div>
+</div>
+<div class="box">
+<h3>Fragrantica Audience (Similarweb, Jul '26)</h3>
+<ul>
+<li><strong>53% female / 47% male</strong> — split audience, not niche</li>
+<li><strong>Largest group:</strong> 25-34 (31%) — prime app-user demographic</li>
+<li><strong>Top country:</strong> US (39% traffic) — high App Store spend</li>
+<li><strong>Engagement:</strong> 4.67 pages/visit, 5 min avg</li>
+<li><strong>Traffic:</strong> 60% organic search — massive SEO moat</li>
+<li><strong>Est. registered:</strong> 2-5M users</li>
+</ul>
+</div>
+<div class="box">
+<h3>Market Size</h3>
+<div class="bar"><div class="bl"><strong>TAM</strong> — $60B market</div><div class="bt"><div class="bf" style="width:100%"></div></div><div class="bv">$60B</div></div>
+<div class="bar"><div class="bl"><strong>SAM</strong> — Digital tools</div><div class="bt"><div class="bf g" style="width:25%"></div></div><div class="bv">~$1.5B</div></div>
+<div class="bar"><div class="bl"><strong>SOM</strong> — Collector apps</div><div class="bt"><div class="bf a" style="width:5%"></div></div><div class="bv">~$75M</div></div>
+</div>
+</div>
+<div class="col">
+<div class="box">
+<h3>The Gap — Zero Competition</h3>
+<table>
+<tr><th>Platform</th><th>Users</th><th>Mobile</th><th>Layering</th><th>Clones</th></tr>
+<tr><td>Fragrantica</td><td>46.1M</td><td class="neu">&#x274C; Wrapper</td><td class="neg">&#x274C;</td><td class="neg">&#x274C;</td></tr>
+<tr><td>Parfumo</td><td>1-2M</td><td class="neu">&#x274C; Basic</td><td class="neg">&#x274C;</td><td class="neg">&#x274C;</td></tr>
+<tr><td>Basenotes</td><td>500K-1M</td><td class="neg">&#x274C;</td><td class="neg">&#x274C;</td><td class="neg">&#x274C;</td></tr>
+<tr><td>Spreadsheets</td><td>Unknown</td><td class="pos">&#x2705; Manual</td><td class="neg">&#x274C;</td><td class="neg">&#x274C;</td></tr>
+<tr><td><strong>Scent Lab</strong></td><td><span style="color:#818cf8">0 &rarr; ?</span></td><td class="pos">&#x2705; Native</td><td class="pos">&#x2705; AI</td><td class="pos">&#x2705; Built-in</td></tr>
+</table>
+</div>
+<div class="box">
+<h3>Why Nobody Has Built This</h3>
+<ul>
+<li><strong>Fragrantica sells ads</strong> — mobile app doesn't grow their ad revenue</li>
+<li><strong>Domain gap</strong> — must collect fragrances to build proper layering engine</li>
+<li><strong>Not a VC play</strong> — lifestyle biz, VCs pass; creators build</li>
+<li><strong>Perfect timing</strong> — clone market exploding, FragTok massive</li>
+</ul>
+</div>
+<div class="box y"><p style="font-size:9pt;color:#fbbf24;margin:0"><strong>Key insight:</strong> 46M visitors — none can organize in native app. Blue ocean.</p></div>
+</div>
+</div>
+<div class="footer"><span>SCENT LAB</span><span class="page">3 / 8</span></div>
+</div>
+<div class="page c4">
+<h2>What It <span>Costs</span></h2>
+<div class="sub">How much to build, launch, and run ScentLab — on a shoestring budget.</div>
+<div class="row">
+<div class="col">
+<div class="box">
+<h3>&#x1F4BB; App Development</h3>
+<table>
+<tr><th>Item</th><th>Cost</th></tr>
+<tr><td>Apple Developer Program</td><td class="neu">RM 399/yr</td></tr>
+<tr><td>React Native (Expo)</td><td class="pos">RM 0 (free)</td></tr>
+<tr><td>Firebase (Spark &rarr; Blaze)</td><td class="pos">RM 0 &ndash; 100/mo</td></tr>
+<tr><td>App icon + screenshots (DIY)</td><td class="neu">RM 0 &ndash; 500</td></tr>
+<tr><td>Domain + landing page</td><td class="neu">RM 60 &ndash; 120/yr</td></tr>
+</table>
+</div>
+<div class="box">
+<h3>&#x1F3E2; Company Setup</h3>
+<table>
+<tr><th>Item</th><th>Cost</th><th>Type</th></tr>
+<tr><td>Sdn Bhd registration</td><td class="neu">2,000 &ndash; 3,500</td><td>One-time</td></tr>
+<tr><td>MSC Malaysia status</td><td class="neu">500 &ndash; 1,500</td><td>One-time</td></tr>
+<tr><td>Employment Pass</td><td class="neu">2,000 &ndash; 4,000</td><td>One-time</td></tr>
+<tr><td>Corporate secretary</td><td class="neu">1,000 &ndash; 2,000/yr</td><td>Annual</td></tr>
+<tr><td>Nominee director</td><td class="neu">1,000 &ndash; 2,000/yr</td><td>Annual</td></tr>
+<tr><td>Bank deposit (refundable)</td><td class="neu">1,000 &ndash; 10,000</td><td>Refundable</td></tr>
+</table>
+</div>
+</div>
+<div class="col">
+<div class="box">
+<h3>&#x1F4CA; Monthly Run Rate</h3>
+<table>
+<tr><th>Item</th><th>Cost</th></tr>
+<tr><td>Firebase (10K-50K users)</td><td class="pos">~RM 50 &ndash; 150</td></tr>
+<tr><td>Apple Developer (amortized)</td><td class="pos">~RM 33</td></tr>
+<tr><td>Domain + hosting</td><td class="pos">~RM 10</td></tr>
+<tr><td>Corporate sec (amortized)</td><td class="pos">~RM 100 &ndash; 170</td></tr>
+<tr><td><strong>Monthly Total</strong></td><td class="pos" style="font-weight:700">~RM 200 &ndash; 400</td></tr>
+</table>
+</div>
+<div class="box g">
+<h3 style="color:#34d399">&#x1F4A1; Why I Can Do This Cheap</h3>
+<ul>
+<li><strong>Dev: RM 0</strong> — AI partner builds the app with me, no outsourcing</li>
+<li><strong>Marketing: RM 0</strong> — 800K+ followers, no paid ads needed</li>
+<li><strong>Database: RM 0</strong> — 88 fragrances already researched/verified</li>
+<li><strong>Hosting: near-zero</strong> — Firebase free tier covers 10K users</li>
+</ul>
+</div>
+<div class="box b" style="text-align:center;padding:12px">
+<div class="bignum">~RM 8,000 &ndash; 14,000</div>
+<div style="font-size:8px;color:#666;margin-top:2px">Total first-year investment &mdash; company + app</div>
+<div style="font-size:7px;color:#555">(~$1,800 &ndash; $3,200 USD)</div>
+</div>
+</div>
+</div>
+<div class="footer"><span>SCENT LAB</span><span class="page">4 / 8</span></div>
+</div>
+<div class="page c1">
+<h2>What I Can <span>Make</span></h2>
+<div class="sub">Projections based on real data and app store benchmarks.</div>
+<div class="row">
+<div class="col">
+<div class="stats">
+<div class="stat"><div class="num">46.1M</div><div class="lbl">Fragrantica Users</div></div>
+<div class="stat"><div class="num">10B+</div><div class="lbl">#fragrancetok Views</div></div>
+<div class="stat"><div class="num">800K+</div><div class="lbl">My Total Reach</div></div>
+</div>
+<div class="box">
+<h3>Revenue Model</h3>
+<table>
+<tr><th>Stream</th><th>Price</th><th>Net After Apple</th></tr>
+<tr><td>Paid App Download</td><td class="pos">$4.99 one-time</td><td class="pos">$3.49</td></tr>
+<tr><td>Premium Upgrade</td><td class="pos">$2.99/yr</td><td class="pos">$2.09</td></tr>
+<tr><td>In-App (themes, stickers)</td><td class="pos">$0.99 &ndash; 2.99</td><td class="pos">~$0.70 &ndash; 2.10</td></tr>
+</table>
+</div>
+<div class="box">
+<h3>Year 1 Revenue Scenarios</h3>
+<table>
+<tr><th>Scenario</th><th>Downloads</th><th>Revenue</th><th>Net Profit</th></tr>
+<tr><td>Low (organic only)</td><td>500</td><td class="neu">~$2,800</td><td class="pos">~$2,500</td></tr>
+<tr><td>Moderate (TikTok + list)</td><td>3,000</td><td class="neu">~$17,500</td><td class="pos">~$16,600</td></tr>
+<tr><td>Good (viral + community)</td><td>10,000</td><td class="neu">~$58,500</td><td class="pos">~$57,000</td></tr>
+</table>
+<p style="font-size:7px;color:#666;margin-top:2px">Even Low covers costs. Break-even at 500 downloads.</p>
+</div>
+</div>
+<div class="col">
+<div class="box">
+<h3>Where Numbers Come From</h3>
+<ul>
+<li><strong>46M monthly users</strong> — 0.01% conversion = 4,600 downloads</li>
+<li><strong>FragTok: 10B+ views</strong> — one viral video = thousands</li>
+<li><strong>Collectors spend</strong> RM200-2K per bottle. $4.99 is change</li>
+<li><strong>App Store:</strong> utility apps convert 2-5% of page views</li>
+<li><strong>My audience:</strong> 800K+, 1% = 8,000 downloads</li>
+</ul>
+</div>
+<div class="box">
+<h3>Conversion Funnel (per 100K views)</h3>
+<div class="bar"><div class="bl">Video views</div><div class="bt"><div class="bf p" style="width:100%"></div></div><div class="bv">100K</div></div>
+<div class="bar"><div class="bl">Link taps (2%)</div><div class="bt"><div class="bf" style="width:2%"></div></div><div class="bv">2,000</div></div>
+<div class="bar"><div class="bl">App Store views</div><div class="bt"><div class="bf" style="width:1.5%"></div></div><div class="bv">1,500</div></div>
+<div class="bar"><div class="bl">Downloads (0.5%)</div><div class="bt"><div class="bf g" style="width:0.5%"></div></div><div class="bv">500</div></div>
+<div class="bar"><div class="bl">Premium subs</div><div class="bt"><div class="bf a" style="width:0.1%"></div></div><div class="bv">100</div></div>
+</div>
+<div class="box g">
+<h3 style="color:#34d399">The Killer Math</h3>
+<p style="font-size:9px;color:#ccc;line-height:1.3">At Moderate ($17,500), Year 1 revenue covers ALL costs. Everything after is profit.</p>
+<p style="font-size:10px;color:#34d399;font-weight:700;margin-top:2px">Break-even: 3-6 months. Even with zero virality.</p>
+</div>
+</div>
+</div>
+<div class="footer"><span>SCENT LAB</span><span class="page">5 / 8</span></div>
+</div>
+<div class="page c2">
+<h2>Development <span>Roadmap</span></h2>
+<div class="sub">6 weeks to MVP. Built with AI assistance. Zero outsourcing.</div>
+<div class="g3">
+<div class="box" style="border-left:3px solid #6366f1">
+<h3>Week 1-2: Foundation</h3>
+<ul>
+<li>React Native (Expo) project</li>
+<li>Firebase Auth + Firestore</li>
+<li>Migrate 88 &rarr; 500+ fragrances</li>
+<li>Core CRUD (add/edit/delete)</li>
+<li><strong>Milestone:</strong> See fragrance in list</li>
+</ul>
+</div>
+<div class="box" style="border-left:3px solid #818cf8">
+<h3>Week 3-4: Core Features</h3>
+<ul>
+<li>Search + filter (brand, notes, season)</li>
+<li>Fragrance detail + full pyramid</li>
+<li><strong>Layering Engine</strong></li>
+<li>Collection dashboard stats</li>
+<li><strong>Milestone:</strong> Full mgmt + layering</li>
+</ul>
+</div>
+<div class="box" style="border-left:3px solid #c084fc">
+<h3>Week 5-6: Launch</h3>
+<ul>
+<li>Premium (in-app purchase)</li>
+<li>TikTok share feature</li>
+<li>Cloud sync</li>
+<li>TestFlight + App Store assets</li>
+<li><strong>Milestone:</strong> App Store submission</li>
+</ul>
+</div>
+</div>
+<div class="row" style="margin-top:8px">
+<div class="col">
+<div class="box">
+<h3>Post-Launch (Month 2-3)</h3>
+<ul>
+<li>Barcode scanner &mdash; scan &rarr; auto-fill</li>
+<li>Android &mdash; same codebase</li>
+<li>Community feed</li>
+<li>Advanced layering (3+ combos)</li>
+<li>Export JSON/CSV</li>
+</ul>
+</div>
+</div>
+<div class="col">
+<div class="box">
+<h3>Future (Month 3-6)</h3>
+<ul>
+<li>Photo recognition &mdash; snap bottle pic</li>
+<li>Web app &mdash; desktop browser</li>
+<li>Scent of the Day &mdash; Stories stickers</li>
+<li>Affiliate links &mdash; extra revenue</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="footer"><span>SCENT LAB</span><span class="page">6 / 8</span></div>
+</div>
+<div class="page c3">
+<h2>My <span>Advantage</span></h2>
+<div class="sub">Why I'm the right person to build this.</div>
+<div class="row">
+<div class="col">
+<div class="box">
+<h3>&#x1F980; What I Bring</h3>
+<ul>
+<li><strong>Domain expertise</strong> — I own 88+ fragrances. I know notes and clones</li>
+<li><strong>800K+ followers</strong> — built-in distribution, no ads needed</li>
+<li><strong>In the community</strong> — brands pay me (YSL, Mykonos, Velixir)</li>
+<li><strong>AI-assisted dev</strong> — partner builds with me. Zero dev cost</li>
+<li><strong>Self-funded</strong> — no investors. RM 8-14K all-in</li>
+</ul>
+</div>
+<div class="box">
+<h3>Distribution (Zero Ad Spend)</h3>
+<table>
+<tr><th>Channel</th><th>Reach</th><th>Cost</th></tr>
+<tr><td>TikTok &mdash; layering demos</td><td>10K-100K views</td><td class="pos">$0</td></tr>
+<tr><td>"I built an app" content</td><td>Viral format</td><td class="pos">$0</td></tr>
+<tr><td>Email waitlist pre-launch</td><td>1K-5K signups</td><td class="pos">$0</td></tr>
+<tr><td>Reddit: r/fragrance (1.5M)</td><td>Active community</td><td class="pos">$0</td></tr>
+<tr><td>r/fragranceclones (100K+)</td><td>Clone enthusiasts</td><td class="pos">$0</td></tr>
+</table>
+</div>
+</div>
+<div class="col">
+<div class="box">
+<h3>Risk vs Reward</h3>
+<table>
+<tr><th>Risk</th><th>Mitigation</th></tr>
+<tr><td>App doesn't sell</td><td class="pos">Only RM 8-14K. Break-even at 500 downlds</td></tr>
+<tr><td>Too busy with content</td><td class="pos">AI partner builds. I do product + marketing</td></tr>
+<tr><td>EP not approved</td><td class="pos">Launch as passive shareholder on current EP</td></tr>
+<tr><td>Fragrantica copies</td><td class="pos">Web company. 18 years, zero mobile</td></tr>
+</table>
+</div>
+<div class="box g">
+<h3 style="color:#34d399">&#x1F4CA; The Bottom Line</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Total upfront investment</td><td class="neu">RM 8,000 &ndash; 14,000</td></tr>
+<tr><td>Monthly run cost</td><td class="neu">RM 200 &ndash; 400</td></tr>
+<tr><td>Break-even (moderate)</td><td class="pos">3-6 months</td></tr>
+<tr><td>Year 1 revenue (moderate)</td><td class="pos">~$17,500 (~RM 80K)</td></tr>
+<tr><td>Year 1 net profit</td><td class="pos">~RM 66,000 after costs</td></tr>
+</table>
+</div>
+</div>
+</div>
+<div class="footer"><span>SCENT LAB</span><span class="page">7 / 8</span></div>
+</div>
+<div class="page c4 cover">
+<h1 style="font-size:36px">Time to <span>Build</span></h1>
+<div class="line"></div>
+<div style="margin-top:16px;font-size:13px;color:#888;max-width:440px;line-height:1.5;margin:16px auto">
+46M monthly fragrance enthusiasts. Zero dedicated apps. 800K+ followers as a launchpad. A working prototype with 88 verified scents. Total cost: less than two bottles of niche perfume.
+</div>
+<div style="margin-top:24px;display:flex;gap:28px;justify-content:center">
+<div><div style="font-size:7px;color:#666;text-transform:uppercase;letter-spacing:1px">Creator</div><div style="font-size:11px;color:#818cf8">@umarnaq</div></div>
+<div><div style="font-size:7px;color:#666;text-transform:uppercase;letter-spacing:1px">App</div><div style="font-size:11px;color:#c084fc">Scent Lab</div></div>
+<div><div style="font-size:7px;color:#666;text-transform:uppercase;letter-spacing:1px">Status</div><div style="font-size:11px;color:#34d399">Building</div></div>
+</div>
+<div style="margin-top:24px;font-size:8px;color:#555">August 2026</div>
+<div class="footer"><span>SCENT LAB</span><span class="page">8 / 8</span></div>
+</div>
+</body></html>
