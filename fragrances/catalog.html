@@ -4465,7 +4465,7 @@ function breakdownRow(icon, label, detail, pct){
 
 function scoreSelectedPair(){
   if(!layerA || !layerB) return;
-  var combo = rateLayerPair(layerA.id, layerB.id);
+  var combo = rateLayer(layerA.id, layerB.id);
   if(!combo) return;
   displayLayerResult(combo);
 }
