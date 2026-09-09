@@ -59,6 +59,27 @@ h1{font-size:1.3rem;color:#fff;margin-bottom:2px}
 #filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;align-items:center}
 #filters .filter-label{color:#888;font-size:.7rem;padding:2px 4px;width:100%}
 
+/* Autocomplete dropdown */
+.autocomplete-wrap{position:relative;flex:1}
+.autocomplete-wrap input{width:100%;max-width:100% !important}
+.ac-dropdown{position:absolute;top:100%;left:0;right:0;background:#1a1a1a;border:1px solid #444;border-top:none;border-radius:0 0 8px 8px;max-height:240px;overflow-y:auto;z-index:100;display:none}
+.ac-item{padding:8px 10px;cursor:pointer;font-size:.78rem;color:#ccc;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}
+.ac-item:last-child{border-bottom:none}
+.ac-item:hover{background:#2a2a2a;color:#fff}
+.ac-item .ac-brand{color:#818cf8;font-size:.68rem}
+.ac-item.selected{background:#1e1b4b;color:#a5b4fc}
+.ac-input-selected{display:flex;align-items:center;gap:6px;padding:6px 10px;background:#1e1b4b;border:1px solid #3730a3;border-radius:6px;color:#a5b4fc;font-size:.8rem;margin-bottom:4px}
+.ac-input-selected .ac-remove{cursor:pointer;color:#888;font-size:1rem;line-height:1;padding:0 4px}
+.ac-input-selected .ac-remove:hover{color:#fca5a5}
+
+/* Score breakdown */
+.br-section{margin-top:8px;padding-top:8px;border-top:1px solid #333}
+.br-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:.72rem}
+.br-row .br-label{color:#888}
+.br-row .br-val{color:#ccc;font-weight:600}
+.br-bar{height:4px;border-radius:2px;background:#333;margin:2px 0 6px 0;overflow:hidden}
+.br-bar-fill{height:100%;border-radius:2px;transition:width .3s}
+
 /* Desktop tweaks */
 @media(min-width:769px){
   h1{font-size:1.4rem;margin-bottom:6px}
@@ -99,7 +120,30 @@ h1{font-size:1.3rem;color:#fff;margin-bottom:2px}
   </div>
   <div id="filters" style="margin-bottom:10px;display:flex;flex-wrap:wrap;gap:6px"></div>
   <div id="mobilePicks"></div>
-  <div id="layerCombo" style="display:none"></div>
+  <div id="layerCombo" style="display:none">
+    <div id="layerSearchArea">
+      <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center">
+        <span style="color:#888;font-size:.75rem;white-space:nowrap">Frag A</span>
+        <div class="autocomplete-wrap" id="acWrapA">
+          <input class="search-bar" id="acInputA" placeholder="Search fragrance..." style="margin-bottom:0">
+          <div class="ac-dropdown" id="acDropA"></div>
+        </div>
+        <span style="color:#555;font-size:.85rem">+</span>
+        <span style="color:#888;font-size:.75rem;white-space:nowrap">Frag B</span>
+        <div class="autocomplete-wrap" id="acWrapB">
+          <input class="search-bar" id="acInputB" placeholder="Search fragrance..." style="margin-bottom:0">
+          <div class="ac-dropdown" id="acDropB"></div>
+        </div>
+      </div>
+      <div id="layerSelectedA"></div>
+      <div id="layerSelectedB"></div>
+      <div id="layerActions" style="display:flex;gap:6px;margin-bottom:10px">
+        <button id="layerScoreBtn" onclick="scoreSelectedPair()" style="padding:8px 16px;background:#6366f1;border:none;color:#fff;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;flex:1" disabled>Select both fragrances to score</button>
+        <button onclick="shuffleLayer()" style="padding:8px 12px;background:#1a1a1a;border:1px solid #333;color:#aaa;border-radius:8px;font-size:.8rem;cursor:pointer;white-space:nowrap">🔀 Shuffle</button>
+      </div>
+    </div>
+    <div id="layerResult"></div>
+  </div>
   <div id="mobileResults"></div>
   <p class="upd" id="upd" style="display:none"></p>
 </div>
@@ -4203,26 +4247,184 @@ function getFiltered(){
 // --- LAYERING (replaced by v2 engine above) ---
 // All layering functions defined inline above this section
 
-// --- RENDER ---
-function renderLayer(){
-  document.getElementById('mobilePicks').innerHTML = '';
-  var combo = generateLayerCombo();
-  renderLayerCombo(combo);
+// --- FRAGRANCE LIST FOR AUTOCOMPLETE ---
+var FRAG_LIST = null;
+function getFragList(){
+  if(FRAG_LIST) return FRAG_LIST;
+  FRAG_LIST = [];
+  for(var fid in DB.fragrances){
+    FRAG_LIST.push({id:fid, name:DB.fragrances[fid].name, brand:DB.fragrances[fid].brand});
+  }
+  FRAG_LIST.sort(function(a,b){ return a.name.localeCompare(b.name); });
+  return FRAG_LIST;
 }
 
-function renderLayerCombo(combo){
-  var div = document.getElementById('layerCombo');
-  div.style.display = 'block';
-  var badge = '';
-  if(combo.score <= -5) badge = '<span style="background:#065f46;color:#6ee7b7;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:600">🔥 Excellent Match</span>';
-  else if(combo.score <= 0) badge = '<span style="background:#1e3a5f;color:#93c5fd;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:600">✅ Good Match</span>';
-  else if(combo.score <= 5) badge = '<span style="background:#422006;color:#fde68a;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:600">⚠️ Experimental</span>';
-  else badge = '<span style="background:#3b0f0f;color:#fca5a5;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:600">🫗 Bold Pairing</span>';
-  div.innerHTML = '<div style="background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:12px;margin-bottom:10px">' +
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">' +
-      '<div style="font-size:.85rem;font-weight:700;color:#6366f1">🎲 Layering Combo</div>' + badge +
+// --- AUTOCOMPLETE STATE ---
+var layerA = null; // {id, name, brand}
+var layerB = null;
+
+function buildAutocomplete(inputId, dropId, onSelect){
+  var input = document.getElementById(inputId);
+  var drop = document.getElementById(dropId);
+  input.addEventListener('input', function(){
+    var q = input.value.toLowerCase().trim();
+    if(q.length === 0){ drop.style.display = 'none'; return; }
+    var items = getFragList().filter(function(f){
+      return f.name.toLowerCase().indexOf(q) >= 0 || f.brand.toLowerCase().indexOf(q) >= 0;
+    }).slice(0, 15);
+    if(items.length === 0){ drop.style.display = 'none'; return; }
+    drop.innerHTML = items.map(function(f){
+      return '<div class="ac-item" data-id="'+f.id+'"><span>'+f.name+'</span><span class="ac-brand">'+f.brand+'</span></div>';
+    }).join('');
+    drop.style.display = 'block';
+    drop.querySelectorAll('.ac-item').forEach(function(el){
+      el.addEventListener('click', function(){
+        var id = this.dataset.id;
+        onSelect(id);
+        drop.style.display = 'none';
+        input.value = '';
+      });
+    });
+  });
+  input.addEventListener('blur', function(){ setTimeout(function(){ drop.style.display = 'none'; }, 200); });
+  input.addEventListener('focus', function(){ if(input.value.trim().length > 0) drop.style.display = 'block'; });
+}
+
+function selectFragA(id){
+  if(id === (layerB && layerB.id)) { layerB = null; clearSelectedB(); }
+  layerA = {id:id, name:DB.fragrances[id].name, brand:DB.fragrances[id].brand};
+  renderSelectedA();
+  updateScoreBtn();
+}
+
+function selectFragB(id){
+  if(id === (layerA && layerA.id)) { layerA = null; clearSelectedA(); }
+  layerB = {id:id, name:DB.fragrances[id].name, brand:DB.fragrances[id].brand};
+  renderSelectedB();
+  updateScoreBtn();
+}
+
+function clearSelectedA(){
+  layerA = null;
+  document.getElementById('layerSelectedA').innerHTML = '';
+  document.getElementById('layerResult').innerHTML = '';
+  updateScoreBtn();
+}
+
+function clearSelectedB(){
+  layerB = null;
+  document.getElementById('layerSelectedB').innerHTML = '';
+  document.getElementById('layerResult').innerHTML = '';
+  updateScoreBtn();
+}
+
+function renderSelectedA(){
+  if(!layerA){ document.getElementById('layerSelectedA').innerHTML = ''; return; }
+  document.getElementById('layerSelectedA').innerHTML = '<div class="ac-input-selected"><span>🧴 '+layerA.name+' <span style="color:#818cf8;font-size:.7rem">'+layerA.brand+'</span></span><span class="ac-remove" onclick="clearSelectedA()">✕</span></div>';
+}
+
+function renderSelectedB(){
+  if(!layerB){ document.getElementById('layerSelectedB').innerHTML = ''; return; }
+  document.getElementById('layerSelectedB').innerHTML = '<div class="ac-input-selected"><span>🧴 '+layerB.name+' <span style="color:#818cf8;font-size:.7rem">'+layerB.brand+'</span></span><span class="ac-remove" onclick="clearSelectedB()">✕</span></div>';
+}
+
+function updateScoreBtn(){
+  var btn = document.getElementById('layerScoreBtn');
+  if(layerA && layerB){
+    btn.disabled = false;
+    btn.textContent = '🔍 Score This Pair';
+    btn.style.background = '#6366f1';
+    btn.style.cursor = 'pointer';
+  } else {
+    btn.disabled = true;
+    btn.textContent = layerA || layerB ? 'Select both fragrances to score' : 'Select both fragrances to score';
+    btn.style.background = '#333';
+    btn.style.cursor = 'default';
+  }
+}
+
+function shuffleLayer(){
+  document.getElementById('layerResult').innerHTML = '';
+  var combo;
+  if(layerA && !layerB){
+    combo = generateLayerComboFor(layerA.id);
+    layerB = {id: combo.topId, name: combo.top.name, brand: combo.top.brand};
+    renderSelectedB();
+  } else if(layerB && !layerA){
+    combo = generateLayerComboFor(layerB.id);
+    layerA = {id: combo.topId, name: combo.top.name, brand: combo.top.brand};
+    renderSelectedA();
+  } else if(layerA && layerB){
+    // Lock A, shuffle B
+    combo = generateLayerComboFor(layerA.id);
+    layerB = {id: combo.topId, name: combo.top.name, brand: combo.top.brand};
+    renderSelectedB();
+  } else {
+    combo = generateLayerCombo();
+    layerA = {id: combo.baseId, name: combo.base.name, brand: combo.base.brand};
+    layerB = {id: combo.topId, name: combo.top.name, brand: combo.top.brand};
+    renderSelectedA();
+    renderSelectedB();
+  }
+  updateScoreBtn();
+  displayLayerResult(combo);
+}
+
+// --- SCORE NORMALIZATION (1-5) ---
+function layerScore(combo){
+  var raw = combo.score;
+  if(raw <= -8) return {score:5, label:'Perfect Layer', icon:'🔥', color:'#065f46', barColor:'#10b981'};
+  if(raw <= -4) return {score:4, label:'Great Match', icon:'✅', color:'#1e3a5f', barColor:'#3b82f6'};
+  if(raw <= 0)  return {score:3, label:'Good Pair', icon:'👍', color:'#1e3a5f', barColor:'#6366f1'};
+  if(raw <= 5)  return {score:2, label:'Experimental', icon:'⚠️', color:'#422006', barColor:'#f59e0b'};
+  return {score:1, label:'Bold Pairing', icon:'🫗', color:'#3b0f0f', barColor:'#ef4444'};
+}
+
+// --- DETAILED BREAKDOWN ---
+function scoreBreakdown(combo){
+  var over = combo.notes || {shared:0, complementary:0, bridge:0};
+  var dist = wheelDistance(combo.famA, combo.famB);
+  var distLabel = dist === 0 ? 'Same family' : dist === 1 ? 'Adjacent' : dist === 2 ? 'One step apart' : dist === 3 ? 'Two steps apart' : 'Opposite';
+  var distScore = dist === 0 ? 5 : dist === 1 ? 4 : dist === 2 ? 3 : dist === 3 ? 2 : 1;
+  var noteScore = 1;
+  if(over.shared >= 2) noteScore = 5;
+  else if(over.shared >= 1) noteScore = 4;
+  else if(over.complementary >= 3) noteScore = 4;
+  else if(over.complementary >= 1) noteScore = 3;
+  else noteScore = 2;
+  var bridgeScore = over.bridge > 0 ? 4 : 2;
+  var baseA = combo.base;
+  var weightOK = baseA && (baseA.longevity !== 'Weak') && (baseA.sillage !== 'Weak' && baseA.sillage !== 'Intimate');
+  var balScore = weightOK ? 4 : 3;
+
+  return {
+    wheel: {score: distScore, label: distLabel, detail: combo.famA + ' + ' + combo.famB},
+    notes: {score: noteScore, label: over.shared + ' shared, ' + over.complementary + ' complementary', detail: (over.shared + over.complementary) + ' note connections'},
+    bridge: {score: bridgeScore, label: over.bridge > 0 ? over.bridge + ' bridge notes found' : 'No bridge notes', detail: over.bridge > 0 ? 'Helps connect distant families' : 'Relying on direct compatibility'},
+    balance: {score: balScore, label: weightOK ? 'Well-balanced' : 'Lightweight pair', detail: weightOK ? combo.base.name + ' anchors as base layer' : 'Both are light, may fade fast'}
+  };
+}
+
+// --- RENDER LAYER RESULT ---
+function displayLayerResult(combo){
+  if(!combo) return;
+  var ls = layerScore(combo);
+  var breakdown = scoreBreakdown(combo);
+  var rd = document.getElementById('layerResult');
+
+  rd.innerHTML = '<div style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:14px">' +
+    // Header with big score
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">' +
+      '<div style="font-size:.85rem;font-weight:700;color:#6366f1">🎲 Layering Score</div>' +
+      '<div style="display:flex;align-items:center;gap:8px">' +
+        '<span style="font-size:1.4rem;font-weight:800;color:#fff">' + ls.score + '</span><span style="color:#555;font-size:.85rem">/5</span>' +
+        '<span style="background:' + ls.color + ';color:#fff;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700">' + ls.icon + ' ' + ls.label + '</span>' +
+      '</div>' +
     '</div>' +
-    '<div style="display:flex;gap:8px;margin-bottom:8px">' +
+    // Progress bar
+    '<div class="br-bar"><div class="br-bar-fill" style="width:' + (ls.score/5*100) + '%;background:' + ls.barColor + '"></div></div>' +
+    // Frag pair
+    '<div style="display:flex;gap:8px;margin:10px 0">' +
       '<div style="flex:1;background:#111;border:1px solid #333;border-radius:8px;padding:8px;text-align:center">' +
         '<span style="color:#888;font-size:.6rem;text-transform:uppercase;letter-spacing:.5px">BASE</span>' +
         '<div style="color:#fff;font-weight:600;font-size:.85rem">' + combo.base.name + '</div>' +
@@ -4236,13 +4438,50 @@ function renderLayerCombo(combo){
         '<div style="color:#555;font-size:.65rem;margin-top:2px">⚡' + (combo.top.longevity||'') + ' · ' + (combo.top.sillage||'') + '</div>' +
       '</div>' +
     '</div>' +
-    '<div style="background:#1e1b4b;color:#c7d2fe;padding:10px;border-radius:8px;font-size:.78rem;margin-bottom:6px;line-height:1.5">💡 ' + combo.reason + '</div>' +
-    '<div style="display:flex;gap:2px;font-size:.65rem;color:#555;margin-bottom:6px;justify-content:center">' +
-      '<span>🏷️ ' + (combo.famA||'?') + '</span><span style="color:#333"> + </span><span>🏷️ ' + (combo.famB||'?') + '</span>' +
-      (combo.notes ? '<span style="color:#333"> · </span><span>🔗 ' + combo.notes.shared + ' shared · ' + combo.notes.complementary + ' complementary</span>' : '') +
+    // Reason
+    '<div style="background:#1e1b4b;color:#c7d2fe;padding:10px;border-radius:8px;font-size:.78rem;margin-bottom:4px;line-height:1.5">💡 ' + combo.reason + '</div>' +
+    // Detailed breakdown
+    '<div class="br-section">' +
+      '<div style="font-size:.75rem;color:#888;margin-bottom:4px;font-weight:600">📊 Breakdown</div>' +
+      breakdownRow('🎯 Wheel Distance', breakdown.wheel.label, breakdown.wheel.detail, breakdown.wheel.score/5) +
+      breakdownRow('🔗 Note Overlap', breakdown.notes.label, breakdown.notes.detail, breakdown.notes.score/5) +
+      breakdownRow('🌉 Bridge Notes', breakdown.bridge.label, breakdown.bridge.detail, breakdown.bridge.score/5) +
+      breakdownRow('⚖️ Weight Balance', breakdown.balance.label, breakdown.balance.detail, breakdown.balance.score/5) +
     '</div>' +
-    '<button onclick="renderLayer()" style="width:100%;padding:10px;background:#6366f1;border:none;color:#fff;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer">🔀 Shuffle Another Combo</button>' +
+    // Tags
+    '<div style="display:flex;gap:2px;font-size:.65rem;color:#555;margin-top:6px;justify-content:center">' +
+      '<span>🏷️ ' + (combo.famA||'?') + '</span><span style="color:#333"> + </span><span>🏷️ ' + (combo.famB||'?') + '</span>' +
+    '</div>' +
   '</div>';
+}
+
+function breakdownRow(icon, label, detail, pct){
+  var pctPx = Math.round(pct * 100);
+  var colors = ['#ef4444','#f59e0b','#6366f1','#3b82f6','#10b981'];
+  var barColor = colors[Math.min(Math.max(Math.round(pct*5)-1,0),4)];
+  return '<div class="br-row"><span class="br-label">' + icon + ' ' + label + '</span><span class="br-val">' + detail + '</span></div>' +
+    '<div class="br-bar"><div class="br-bar-fill" style="width:' + pctPx + '%;background:' + barColor + '"></div></div>';
+}
+
+function scoreSelectedPair(){
+  if(!layerA || !layerB) return;
+  var combo = rateLayerPair(layerA.id, layerB.id);
+  if(!combo) return;
+  displayLayerResult(combo);
+}
+
+// --- ENTRY POINTS ---
+function renderLayer(){
+  document.getElementById('mobilePicks').innerHTML = '';
+  var lc = document.getElementById('layerCombo');
+  lc.style.display = 'block';
+  document.getElementById('layerResult').innerHTML = '';
+  layerA = null; layerB = null;
+  document.getElementById('layerSelectedA').innerHTML = '';
+  document.getElementById('layerSelectedB').innerHTML = '';
+  updateScoreBtn();
+  buildAutocomplete('acInputA', 'acDropA', selectFragA);
+  buildAutocomplete('acInputB', 'acDropB', selectFragB);
 }
 
 function showLayerFit(fragId){
@@ -4251,18 +4490,14 @@ function showLayerFit(fragId){
     b.classList.toggle('active', b.dataset.mode === 'layer');
   });
   document.getElementById('layerCombo').style.display = 'block';
-  var combo = generateLayerComboFor(fragId);
-  var div = document.getElementById('layerCombo');
-  var f = DB.fragrances[fragId];
-  div.innerHTML = '<div style="background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:12px;margin-bottom:10px">' +
-    '<div style="font-size:.85rem;font-weight:700;color:#6366f1;margin-bottom:6px">🎯 Layering Fit for ' + f.name + '</div>' +
-    '<div style="margin-bottom:6px"><span style="color:#888;font-size:.7rem">BASE LAYER</span><br><span style="color:#fff;font-weight:600">' + combo.base.name + '</span> <span style="color:#818cf8;font-size:.78rem">' + combo.base.brand + '</span></div>' +
-    '<div style="margin-bottom:8px"><span style="color:#888;font-size:.7rem">TOP LAYER</span><br><span style="color:#fff;font-weight:600">' + combo.top.name + '</span> <span style="color:#818cf8;font-size:.78rem">' + combo.top.brand + '</span></div>' +
-    '<div style="background:#1e1b4b;color:#c7d2fe;padding:8px 10px;border-radius:8px;font-size:.8rem;margin-bottom:6px">💡 ' + combo.reason + '</div>' +
-    '<div style="margin-top:6px;display:flex;gap:6px">' +
-      '<button onclick="showLayerFit(\'' + fragId + '\')" style="flex:1;padding:8px;background:#6366f1;border:none;color:#fff;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer">🔀 Another Match</button>' +
-      '<button onclick="switchMode(\'brand\')" style="flex:1;padding:8px;background:#333;border:none;color:#aaa;border-radius:8px;font-size:.8rem;cursor:pointer">↩ Back</button>' +
-    '</div></div>';
+  document.getElementById('layerResult').innerHTML = '';
+  layerA = {id:fragId, name:DB.fragrances[fragId].name, brand:DB.fragrances[fragId].brand};
+  layerB = null;
+  renderSelectedA();
+  document.getElementById('layerSelectedB').innerHTML = '';
+  updateScoreBtn();
+  buildAutocomplete('acInputA', 'acDropA', selectFragA);
+  buildAutocomplete('acInputB', 'acDropB', selectFragB);
 }
 
 function renderMobile(){
