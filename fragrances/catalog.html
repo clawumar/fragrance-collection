@@ -99,6 +99,16 @@ h1{font-size:1.4rem;color:#fff;margin-bottom:2px;text-align:center}
 .back-btn{padding:6px 14px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#aaa;font-size:.78rem;cursor:pointer;margin-bottom:10px;display:inline-block}
 .back-btn:hover{border-color:#6366f1;color:#fff}
 
+/* Search */
+.search-wrap{position:relative;margin-bottom:12px}
+.search-wrap input{width:100%;padding:10px 14px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:.85rem;outline:none}
+.search-wrap input:focus{border-color:#6366f1}
+.search-drop{position:absolute;top:100%;left:0;right:0;background:#1a1a1a;border:1px solid #444;border-top:none;border-radius:0 0 8px 8px;max-height:240px;overflow-y:auto;z-index:100;display:none}
+.search-drop .ac-item{padding:7px 10px;cursor:pointer;font-size:.78rem;color:#ccc;border-bottom:1px solid #222;display:flex;justify-content:space-between}
+.search-drop .ac-item:last-child{border-bottom:none}
+.search-drop .ac-item:hover{background:#2a2a2a;color:#fff}
+.search-drop .ac-item .ac-brand{color:#818cf8;font-size:.68rem}
+
 .nr{text-align:center;padding:40px;color:#555;font-size:.85rem}
 .upd{color:#555;font-size:.7rem;margin-top:12px;text-align:center}
 
@@ -115,6 +125,11 @@ h1{font-size:1.4rem;color:#fff;margin-bottom:2px;text-align:center}
 
 <div id="app">
   <h1>🧴 Fragrance Collection</h1>
+  <div class="search-wrap">
+    <input id="mainSearch" placeholder="🔍 Search by name or brand..." oninput="acSearchMain()" onfocus="acSearchMain()" onblur="setTimeout(function(){document.getElementById('searchDrop').style.display='none'},200)">
+    <div class="search-drop" id="searchDrop"></div>
+  </div>
+  <div id="searchResults"></div>
   <div class="tabs" id="tabs">
     <div class="tab active" data-tab="brand" onclick="switchTab('brand')">Browse by Brand</div>
     <div class="tab" data-tab="mood" onclick="switchTab('mood')">Browse by Mood</div>
@@ -346,6 +361,24 @@ function scorePair(){
   document.getElementById('layerResult').scrollIntoView({behavior:'smooth'});
 }
 
+// Search
+function acSearchMain(){
+  var q=(document.getElementById('mainSearch').value||'').trim().toLowerCase(),
+    drop=document.getElementById('searchDrop');
+  if(!q){drop.style.display='none';drop.innerHTML='';document.getElementById('searchResults').innerHTML='';return}
+  var hits=fragArr.filter(function(f){return f.name.toLowerCase().indexOf(q)!==-1||f.brand.toLowerCase().indexOf(q)!==-1}).slice(0,10);
+  if(!hits.length){drop.style.display='none';drop.innerHTML='';return}
+  drop.innerHTML=hits.map(function(f){return'<div class="ac-item" onmousedown="showSearchResult(\''+f._key+'\')"><span>'+f.name+'</span><span class="ac-brand">'+f.brand+'</span></div>'}).join('');
+  drop.style.display='block';
+}
+function showSearchResult(key){
+  document.getElementById('searchDrop').style.display='none';
+  document.getElementById('mainSearch').value='';
+  var f=frags[key];showFragCards('searchResults',[f],'search',f.name+' — '+f.brand);
+  // Clear active tabs
+  document.querySelectorAll('.tab').forEach(function(e){e.classList.remove('active')});
+  document.querySelectorAll('.tab-content').forEach(function(e){e.style.display='none'});
+}
 // Init
 switchTab('brand');
 </script></body></html>
