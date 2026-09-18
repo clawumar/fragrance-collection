@@ -3,7 +3,7 @@
     "owner": "Umar",
     "tiktok": "@umarnaq",
     "lastUpdated": "2026-09-18",
-    "totalFragrances": 89
+    "totalFragrances": 94
   },
   "fragrances": {
     "persephone": {
@@ -4322,6 +4322,260 @@
         "Musk"
       ],
       "description": "A radiant tropical escape — Island Sun opens with juicy mango and zesty lime layered over creamy coconut, then blooms into a heart of jasmine and orange blossom with a subtle pink pepper spark. The dry-down settles into warm tonka bean, precious woods, and soft musk.",
+      "moods": [
+        "happy-energized",
+        "confident-bold",
+        "romantic-soft",
+        "cozy-comforting"
+      ]
+    },
+    "libre": {
+      "name": "Libre",
+      "brand": "Yves Saint Laurent",
+      "year": 2019,
+      "type": "EDP",
+      "gender": "Women",
+      "family": "Aromatic Floral",
+      "topNotes": [
+        "Mandarin Orange",
+        "Blackcurrant",
+        "Petitgrain",
+        "Lavandin"
+      ],
+      "heartNotes": [
+        "French Lavender",
+        "Moroccan Orange Blossom Absolute",
+        "Jasmine Sambac Absolute"
+      ],
+      "baseNotes": [
+        "Madagascar Vanilla",
+        "Musk",
+        "Cedarwood",
+        "Ambergris"
+      ],
+      "season": [
+        "Spring",
+        "Fall"
+      ],
+      "longevity": "Good",
+      "sillage": "Moderate",
+      "scentProfile": [
+        "Aromatic",
+        "Floral",
+        "Warm",
+        "Vanillic"
+      ],
+      "tags": [
+        "designer",
+        "floral-aromatic",
+        "lavender",
+        "signature-scent",
+        "versatile"
+      ],
+      "notes": "2019 release. Iconic lavender-orange blossom-vanilla DNA. Warm aromatic floral with surprising versatility.",
+      "moods": [
+        "calm-grounded",
+        "happy-energized",
+        "romantic-soft",
+        "cozy-comforting"
+      ]
+    },
+    "power-of-you": {
+      "name": "Power Of You",
+      "brand": "Emporio Armani",
+      "year": 2026,
+      "type": "EDP",
+      "gender": "Women",
+      "family": "Gourmand Floral",
+      "topNotes": [
+        "Passionfruit",
+        "Bitter Orange",
+        "Lemon"
+      ],
+      "heartNotes": [
+        "Frangipani",
+        "Solar Notes"
+      ],
+      "baseNotes": [
+        "Madagascar Vanilla",
+        "Benzoin",
+        "Labdanum"
+      ],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
+      "longevity": "Good",
+      "sillage": "Moderate",
+      "scentProfile": [
+        "Gourmand",
+        "Fruity",
+        "Floral",
+        "Solar",
+        "Warm"
+      ],
+      "tags": [
+        "designer",
+        "gourmand",
+        "tropical",
+        "vanilla",
+        "feminine",
+        "2026"
+      ],
+      "notes": "2026 release by Nisrine Bouazzaoui Grillié & Nadège Le Garlantezec. Luscious gourmand blending passionfruit, creamy frangipani, and vanilla.",
+      "moods": [
+        "happy-energized",
+        "confident-bold",
+        "romantic-soft",
+        "cozy-comforting"
+      ]
+    },
+    "valaya": {
+      "name": "Valaya",
+      "brand": "Parfums de Marly",
+      "year": 2023,
+      "type": "EDP",
+      "gender": "Women",
+      "family": "Musky Floral",
+      "topNotes": [
+        "Aldehydes",
+        "White Peach",
+        "Bergamot",
+        "Mandarin Orange"
+      ],
+      "heartNotes": [
+        "Orange Blossom",
+        "Lily-of-the-Valley",
+        "Petalia",
+        "Nympheal™",
+        "Vetiver",
+        "Mahonia"
+      ],
+      "baseNotes": [
+        "Musk",
+        "Ambroxan",
+        "Akigalawood",
+        "Vanilla"
+      ],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
+      "longevity": "Excellent",
+      "sillage": "Moderate",
+      "scentProfile": [
+        "Musky",
+        "Floral",
+        "Fruity",
+        "Clean",
+        "Airy"
+      ],
+      "tags": [
+        "niche",
+        "musky-floral",
+        "clean",
+        "daily-wear",
+        "signature-scent"
+      ],
+      "notes": "2023 release. Elegant airy musky-floral. White peach-aldehyde opening, creamy floral heart, clean musky-ambrox base. Veil of linen on skin.",
+      "moods": [
+        "calm-grounded",
+        "happy-energized",
+        "confident-bold",
+        "romantic-soft",
+        "cozy-comforting"
+      ]
+    },
+    "good-girl-blush": {
+      "name": "Good Girl Blush",
+      "brand": "Carolina Herrera",
+      "year": 2023,
+      "type": "EDP",
+      "gender": "Women",
+      "family": "Floral Vanilla",
+      "topNotes": [
+        "Bergamot",
+        "Bitter Almond"
+      ],
+      "heartNotes": [
+        "Peony",
+        "Ylang-Ylang"
+      ],
+      "baseNotes": [
+        "Vanilla",
+        "Coumarin"
+      ],
+      "season": [
+        "Spring",
+        "Fall"
+      ],
+      "longevity": "Good",
+      "sillage": "Moderate",
+      "scentProfile": [
+        "Floral",
+        "Vanillic",
+        "Powdery",
+        "Sweet",
+        "Soft"
+      ],
+      "tags": [
+        "designer",
+        "floral-vanilla",
+        "peony",
+        "date-night",
+        "feminine"
+      ],
+      "notes": "2023 release by Quentin Bisch, Shyamala Maisondieu & Christophe Raynaud. Soft peony-ylang with creamy vanilla-coumarin base.",
+      "moods": [
+        "happy-energized",
+        "romantic-soft",
+        "cozy-comforting"
+      ]
+    },
+    "kashmir": {
+      "name": "Kashmir",
+      "brand": "Arabian Oud",
+      "year": 2020,
+      "type": "EDP",
+      "gender": "Men",
+      "family": "Citrus Aromatic",
+      "topNotes": [
+        "Yuzu",
+        "Black Currant",
+        "Plum"
+      ],
+      "heartNotes": [
+        "Oud",
+        "Rose",
+        "Jasmine"
+      ],
+      "baseNotes": [
+        "Kashmir Wood",
+        "White Musk",
+        "Vanilla"
+      ],
+      "season": [
+        "Spring",
+        "Summer",
+        "Fall"
+      ],
+      "longevity": "Excellent",
+      "sillage": "Moderate",
+      "scentProfile": [
+        "Citrus",
+        "Aromatic",
+        "Woody",
+        "Oud",
+        "Floral"
+      ],
+      "tags": [
+        "arabian",
+        "oud",
+        "citrus-aromatic",
+        "luxury",
+        "versatile"
+      ],
+      "notes": "2020 release by Julia Rodriguez Pastor. Bright yuzu-blackcurrant opening with oud-rose-jasmine heart and Kashmir wood-vanilla base. Surprisingly versatile oud.",
       "moods": [
         "happy-energized",
         "confident-bold",
