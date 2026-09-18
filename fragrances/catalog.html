@@ -64,6 +64,16 @@ h1{font-size:1.4rem;color:#fff;margin-bottom:2px;text-align:center}
 .fc-lay{margin-top:8px;width:100%;padding:7px;background:#1e1b4b;border:1px solid #3730a3;border-radius:6px;color:#a5b4fc;font-size:.72rem;font-weight:600;cursor:pointer}
 .fc-lay:hover{background:#2a2563;color:#fff}
 .fc-lay:active{opacity:.7}
+.il-panel{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:12px;margin-top:10px}
+.il-title{font-size:.85rem;color:#ccc;margin-bottom:8px}
+.il-title b{color:#fff}
+.il-brand{color:#818cf8;font-size:.72rem}
+.il-match{margin-bottom:10px}
+.il-pair{font-size:.82rem;color:#ccc;margin-bottom:6px}
+.il-pair b{color:#fff}
+.il-plus{color:#555;margin:0 4px}
+.il-shuffle{width:100%;padding:10px;background:#6366f1;border:none;color:#fff;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer}
+.il-shuffle:active{opacity:.7}
 .fc-nl{font-size:.7rem;color:#aaa;display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
 .fc-nl .nl{color:#666;min-width:28px;font-size:.6rem;text-transform:uppercase;flex-shrink:0}
 
@@ -133,6 +143,7 @@ h1{font-size:1.4rem;color:#fff;margin-bottom:2px;text-align:center}
     <div class="search-drop" id="searchDrop"></div>
   </div>
   <div id="searchResults"></div>
+  <div id="inlineLayer"></div>
   <div class="tabs" id="tabs">
     <div class="tab active" data-tab="brand" onclick="switchTab('brand')">Browse by Brand</div>
     <div class="tab" data-tab="mood" onclick="switchTab('mood')">Browse by Mood</div>
@@ -161,7 +172,7 @@ var brands=Object.keys(brandMap).sort();
 var alpha={};
 brands.forEach(function(b){var c=b[0].toUpperCase();if(!alpha[c])alpha[c]=[];alpha[c].push(b)});
 var letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-var activeAlpha=null, activeBrand=null, activeMood=null, selA=null, selB=null;
+var activeAlpha=null, activeBrand=null, activeMood=null, selA=null, selB=null, layerAnchor=null;
 
 function switchTab(t){
   document.querySelectorAll('.tab').forEach(function(e){e.classList.toggle('active',e.dataset.tab===t)});
@@ -402,10 +413,71 @@ function showSearchResult(key){
   document.querySelectorAll('.tab-content').forEach(function(e){e.style.display='none'});
 }
 function findLayer(key){
-  switchTab('layer');
-  clearFrag('B');
-  selectFrag('A',key);
-  document.getElementById('tab-layer').scrollIntoView({behavior:'smooth'});
+  layerAnchor=key;
+  var f=frags[key];
+  var h='<div class="il-panel"><div class="il-title">🔀 Layers for <b>'+f.name+'</b> <span class="il-brand">'+f.brand+'</span></div>';
+  h+='<div id="ilResult"></div>';
+  h+='<button class="il-shuffle" onclick="shuffleFor()">🎲 Shuffle a match</button></div>';
+  document.getElementById('inlineLayer').innerHTML=h;
+  document.getElementById('inlineLayer').scrollIntoView({behavior:'smooth'});
+  shuffleFor();
+}
+function computePair(a,b){
+  var aNts=(a.topNotes||[]).concat(a.heartNotes||[]).concat(a.baseNotes||[]).concat(a.top||[]).concat(a.middle||[]).concat(a.base||[]);
+  var bNts=(b.topNotes||[]).concat(b.heartNotes||[]).concat(b.baseNotes||[]).concat(b.top||[]).concat(b.middle||[]).concat(b.base||[]);
+  var shared=0;aNts.forEach(function(n){if(bNts.some(function(bn){return bn.toLowerCase()===n.toLowerCase()}))shared++});
+  var aSP=(a.scentProfile||[]).map(function(s){return s.toLowerCase()}),bSP=(b.scentProfile||[]).map(function(s){return s.toLowerCase()});
+  var spShared=aSP.filter(function(s){return bSP.indexOf(s)!==-1}).length;
+  var spScore=spShared/Math.max(aSP.length,bSP.length,1);
+  var aSe=(a.season||[]).map(function(s){return s.toLowerCase()}),bSe=(b.season||[]).map(function(s){return s.toLowerCase()});
+  var seShared=aSe.filter(function(s){return bSe.indexOf(s)!==-1}).length;
+  var seScore=seShared/Math.max(aSe.length,bSe.length,1);
+  var noteScore=shared>0?(shared>=3?1:shared>=2?0.8:0.5):0.3;
+  var s=(noteScore*4+spScore*3+seScore*3)/10;
+  var stars=Math.max(1,Math.round(s*5));
+  var rating=Math.round(((s*4)+1)*10)/10;
+  return {noteScore:noteScore,spScore:spScore,seScore:seScore,stars:stars,rating:rating,aSP:aSP,bSP:bSP,aSe:aSe,bSe:bSe,shared:shared};
+}
+function shuffleFor(){
+  var a=frags[layerAnchor],b,d;
+  for(var tries=0;tries<500;tries++){
+    do{b=fragArr[Math.floor(Math.random()*fragArr.length)]}while(b._key===layerAnchor);
+    d=computePair(a,b);
+    if(d.stars>=4){renderInline(a,b,d);return}
+  }
+  var best=null,bestD=null;
+  for(var t=0;t<60;t++){
+    do{b=fragArr[Math.floor(Math.random()*fragArr.length)]}while(b._key===layerAnchor);
+    d=computePair(a,b);
+    if(!bestD||d.stars>bestD.stars){best=b;bestD=d}
+  }
+  renderInline(a,best,bestD);
+}
+function renderInline(a,b,d){
+  var sc=d.stars<=2?'s2':d.stars<=3?'s3':d.stars<=4?'s4':'s5';
+  var h='<div class="il-match"><div class="il-pair">'+a.name+' <span class="il-plus">+</span> <b>'+b.name+'</b> <span class="il-brand">'+b.brand+'</span></div>';
+  h+='<div class="score-num '+sc+'">'+d.stars+'/5 — '+d.rating+'</div>';
+  h+='<div class="score-br">';
+  [['Note Match',d.noteScore],['Scent Profile',d.spScore],['Season Match',d.seScore]].forEach(function(row){
+    var pct=Math.round(row[1]*100)+'%',col=row[1]>=0.7?'#86efac':row[1]>=0.4?'#fde68a':'#fca5a5';
+    h+='<div class="br-row"><span class="br-l">'+row[0]+'</span><span class="br-v" style="color:'+col+'">'+pct+'</span></div><div class="br-bar"><div class="br-f" style="width:'+pct+';background:'+col+'"></div></div>';
+  });
+  h+='</div>';
+  if(d.stars>=4){
+    h+='<div class="why why-works"><b>✅ Why this works</b>';
+    var reasons=[];
+    if(d.noteScore>=0.8)reasons.push('Strong note overlap — they share key ingredients');
+    else if(d.noteScore>=0.5)reasons.push('Complementary notes — create depth while harmonizing');
+    if(d.spScore>=0.8)reasons.push('Shared scent profile — same family');
+    if(d.seScore>=0.8)reasons.push('Same season pair');
+    if(!reasons.length)reasons.push('Good compatibility across the board');
+    h+=reasons.map(function(r){return'<div>• '+r+'</div>'}).join('');
+    h+='</div>';
+  }else{
+    h+='<div class="why why-not"><b>⚠️ Lower compatibility</b><div>• Best random match found — worth a skin test</div></div>';
+  }
+  h+='</div>';
+  document.getElementById('ilResult').innerHTML=h;
 }
 // Init
 switchTab('brand');
