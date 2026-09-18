@@ -111,7 +111,10 @@ h1{font-size:1.3rem;color:#fff;margin-bottom:2px}
     <p class="sub"><span id="cntM">0</span> fragrances</p>
     <div class="stats" id="stats"></div>
   </div>
-  <input class="search-bar" id="searchM" placeholder="Search name, brand, notes..." style="max-width:100%">
+  <div class="autocomplete-wrap" style="max-width:100%">
+    <input class="search-bar" id="searchM" placeholder="Search name, brand, notes..." style="max-width:100%;margin-bottom:0">
+    <div class="ac-dropdown" id="acDropMain"></div>
+  </div>
   <div class="mode-switch" id="modeSwitch">
     <div class="mode-btn active" data-mode="brand">🏷️ Brand</div>
     <div class="mode-btn" data-mode="note">🎨 Notes</div>
@@ -152,8 +155,8 @@ var DB = {
   "meta": {
     "owner": "Umar",
     "tiktok": "@umarnaq",
-    "lastUpdated": "2026-08-23",
-    "totalFragrances": 87
+    "lastUpdated": "2026-09-18",
+    "totalFragrances": 89
   },
   "fragrances": {
     "persephone": {
@@ -3987,6 +3990,54 @@ var DB = {
       ],
       "notes": "By Kilian The Liquors collection. Gin & tonic-inspired rose fragrance by Frank Voelkl. Icy aquatic cucumber-juniper opening with rose heart and musky-woody base.",
       "_verified": true
+    },
+    "island-sun": {
+      "name": "Island Sun",
+      "brand": "Khadlaj",
+      "house": "Khadlaj Perfumes",
+      "year": 2026,
+      "type": "Extrait de Parfum",
+      "concentration": "Extrait de Parfum",
+      "gender": "Unisex",
+      "family": "Fruity Floral",
+      "scentProfile": [
+        "Tropical",
+        "Fruity",
+        "Floral",
+        "Sweet",
+        "Warm",
+        "Creamy"
+      ],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
+      "topNotes": [
+        "Mango",
+        "Lime",
+        "Coconut",
+        "Lemon"
+      ],
+      "heartNotes": [
+        "Pink Pepper",
+        "Orange Blossom",
+        "Jasmine"
+      ],
+      "baseNotes": [
+        "Tonka Bean",
+        "Precious Woods",
+        "Musk"
+      ],
+      "longevity": "Good",
+      "sillage": "Moderate",
+      "tags": [
+        "tropical",
+        "fruity-floral",
+        "summer",
+        "khadlaj",
+        "2026"
+      ],
+      "notes": "A radiant tropical escape — Island Sun opens with juicy mango and zesty lime layered over creamy coconut, then blooms into a heart of jasmine and orange blossom with a subtle pink pepper spark. The dry-down settles into warm tonka bean, precious woods, and soft musk."
     }
   }
 };
@@ -4257,6 +4308,44 @@ function getFragList(){
   }
   FRAG_LIST.sort(function(a,b){ return a.name.localeCompare(b.name); });
   return FRAG_LIST;
+}
+
+// --- DEBOUNCE UTILITY ---
+function debounce(fn, ms){
+  var timer = null;
+  return function(){
+    var ctx = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function(){ fn.apply(ctx, args); }, ms);
+  };
+}
+
+// --- MAIN SEARCH AUTOCOMPLETE ---
+function buildMainSearchAutocomplete(){
+  var input = document.getElementById('searchM');
+  var drop = document.getElementById('acDropMain');
+  var debounced = debounce(function(){
+    var q = input.value.toLowerCase().trim();
+    if(q.length === 0){ drop.style.display = 'none'; return; }
+    var items = getFragList().filter(function(f){
+      return f.name.toLowerCase().indexOf(q) >= 0 || f.brand.toLowerCase().indexOf(q) >= 0;
+    }).slice(0, 12);
+    if(items.length === 0){ drop.style.display = 'none'; return; }
+    drop.innerHTML = items.map(function(f){
+      return '<div class="ac-item" data-name="'+f.name+'"><span>'+f.name+'</span><span class="ac-brand">'+f.brand+'</span></div>';
+    }).join('');
+    drop.style.display = 'block';
+    drop.querySelectorAll('.ac-item').forEach(function(el){
+      el.addEventListener('click', function(){
+        input.value = this.dataset.name;
+        drop.style.display = 'none';
+        renderMobile();
+      });
+    });
+  }, 300);
+  input.addEventListener('input', debounced);
+  input.addEventListener('blur', function(){ setTimeout(function(){ drop.style.display = 'none'; }, 200); });
+  input.addEventListener('focus', function(){ if(input.value.trim().length > 0) debounced(); });
 }
 
 // --- AUTOCOMPLETE STATE ---
@@ -4672,6 +4761,9 @@ function init(){
   
   // Desktop filter buttons
   buildDesktopFilters();
+  
+  // Wire main search autocomplete
+  buildMainSearchAutocomplete();
   
   // Last updated
   if(DB.meta && DB.meta.lastUpdated){

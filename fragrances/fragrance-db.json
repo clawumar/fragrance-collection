@@ -2,8 +2,8 @@
   "meta": {
     "owner": "Umar",
     "tiktok": "@umarnaq",
-    "lastUpdated": "2026-08-23",
-    "totalFragrances": 87
+    "lastUpdated": "2026-09-18",
+    "totalFragrances": 89
   },
   "fragrances": {
     "persephone": {
@@ -764,7 +764,7 @@
         "french-avenue",
         "beast-mode"
       ],
-      "notes": "A triple-vanilla Extrait \u2014 Madagascar, Bourbon, and Vanilla Caviar top notes, with chocolate truffle, rum, and oud base. Heavy beast-mode gourmand."
+      "notes": "A triple-vanilla Extrait — Madagascar, Bourbon, and Vanilla Caviar top notes, with chocolate truffle, rum, and oud base. Heavy beast-mode gourmand."
     },
     "freeze": {
       "name": "Freeze",
@@ -2094,7 +2094,7 @@
       "notes": "2025 reformulation by Dominique Ropion. Mature woody-aromatic with pine-balsam focus replacing the sweeter apple/tonka of the original."
     },
     "oud-maracuja": {
-      "name": "Oud Maracuj\u00e1",
+      "name": "Oud Maracujá",
       "brand": "Maison Crivelli",
       "type": "EDP",
       "scentProfile": [
@@ -2139,7 +2139,7 @@
         "unisex",
         "maison-crivelli"
       ],
-      "notes": "A bold niche contrast of juicy passion fruit and smoky oud, created by Jordi Fern\u00e1ndez. Stunning sweet-skanky duality."
+      "notes": "A bold niche contrast of juicy passion fruit and smoky oud, created by Jordi Fernández. Stunning sweet-skanky duality."
     },
     "khamrah-qahwa": {
       "name": "Khamrah Qahwa",
@@ -2229,7 +2229,7 @@
         "summer",
         "masculine"
       ],
-      "notes": "A fresh aromatic clone of Louis Vuitton L'Immensit\u00e9 with bright ginger-citrus opening and ambroxan-musk woody base."
+      "notes": "A fresh aromatic clone of Louis Vuitton L'Immensité with bright ginger-citrus opening and ambroxan-musk woody base."
     },
     "oud-wood": {
       "name": "Oud Wood",
@@ -2724,7 +2724,7 @@
         "middle-eastern",
         "special-edition"
       ],
-      "notes": "A fresh aromatic foug\u00e8re from Khadlaj Special Edition blending citrus top with herbal lavender-sage heart and woody-amber base."
+      "notes": "A fresh aromatic fougère from Khadlaj Special Edition blending citrus top with herbal lavender-sage heart and woody-amber base."
     },
     "hawas-black": {
       "name": "Hawas Black",
@@ -2994,7 +2994,7 @@
       "notes": "A deceptively simple but rich gourmand built on cardamom-toffee-amberwood delivering warm sweet comfort."
     },
     "oud-nacre": {
-      "name": "Oud Nacr\u00e9",
+      "name": "Oud Nacré",
       "brand": "Giorgio Armani",
       "type": "EDP",
       "scentProfile": [
@@ -3036,10 +3036,10 @@
         "armani-prive",
         "date-night"
       ],
-      "notes": "An exquisite Armani Priv\u00e9 creation combining rare oud with pearlescent rose and warm amber-vanilla for a sophisticated oriental signature."
+      "notes": "An exquisite Armani Privé creation combining rare oud with pearlescent rose and warm amber-vanilla for a sophisticated oriental signature."
     },
     "orange-mediterranee": {
-      "name": "Orange M\u00e9diterran\u00e9e",
+      "name": "Orange Méditerranée",
       "brand": "Giorgio Armani",
       "type": "EDT",
       "scentProfile": [
@@ -3080,7 +3080,7 @@
         "daytime",
         "armani-prive"
       ],
-      "notes": "A bright Mediterranean citrus from Armani Priv\u00e9 Les Eaux with warm aromatic dry-down evoking sun-drenched orange groves."
+      "notes": "A bright Mediterranean citrus from Armani Privé Les Eaux with warm aromatic dry-down evoking sun-drenched orange groves."
     },
     "myslf-labsolu": {
       "name": "MYSLF L'Absolu",
@@ -3346,7 +3346,7 @@
         "unisex",
         "summer"
       ],
-      "notes": "LV M\u00e9t\u00e9ore clone. Clean airy citrus-vetiver with spicy heart. 8+ hours. Created by Velixir Parfums."
+      "notes": "LV Météore clone. Clean airy citrus-vetiver with spicy heart. 8+ hours. Created by Velixir Parfums."
     },
     "poseidon-velixir": {
       "name": "Poseidon",
@@ -3829,7 +3829,7 @@
       ],
       "longevity": "Moderate",
       "sillage": "Moderate",
-      "rating": 4.0,
+      "rating": 4,
       "tags": [
         "By-Kilian",
         "The-Liquors",
@@ -3837,6 +3837,33 @@
       ],
       "notes": "By Kilian The Liquors collection. Gin & tonic-inspired rose fragrance by Frank Voelkl. Icy aquatic cucumber-juniper opening with rose heart and musky-woody base.",
       "_verified": true
+    },
+    "island-sun": {
+      "name": "Island Sun",
+      "brand": "Khadlaj",
+      "house": "Khadlaj Perfumes",
+      "year": 2026,
+      "type": "Extrait de Parfum",
+      "concentration": "Extrait de Parfum",
+      "gender": "Unisex",
+      "family": "Fruity Floral",
+      "top": [
+        "Mango",
+        "Lime",
+        "Coconut",
+        "Lemon"
+      ],
+      "middle": [
+        "Pink Pepper",
+        "Orange Blossom",
+        "Jasmine"
+      ],
+      "base": [
+        "Tonka Bean",
+        "Precious Woods",
+        "Musk"
+      ],
+      "description": "A radiant tropical escape — Island Sun opens with juicy mango and zesty lime layered over creamy coconut, then blooms into a heart of jasmine and orange blossom with a subtle pink pepper spark. The dry-down settles into warm tonka bean, precious woods, and soft musk."
     }
   }
 }
