@@ -61,6 +61,9 @@ h1{font-size:1.4rem;color:#fff;margin-bottom:2px;text-align:center}
 .vromantic{background:#2e0a1a;color:#f9a8d4}
 .vcozy{background:#1a1a0a;color:#fcd34d}
 .fc-notes{margin-top:4px}
+.fc-lay{margin-top:8px;width:100%;padding:7px;background:#1e1b4b;border:1px solid #3730a3;border-radius:6px;color:#a5b4fc;font-size:.72rem;font-weight:600;cursor:pointer}
+.fc-lay:hover{background:#2a2563;color:#fff}
+.fc-lay:active{opacity:.7}
 .fc-nl{font-size:.7rem;color:#aaa;display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
 .fc-nl .nl{color:#666;min-width:28px;font-size:.6rem;text-transform:uppercase;flex-shrink:0}
 
@@ -251,6 +254,7 @@ function renderCard(f){
     else if(f.base&&f.base.length)h+='<div class="fc-nl"><span class="nl">base</span>'+f.base.join(', ')+'</div>';
     h+='</div>';
   }
+  h+='<button class="fc-lay" onclick="findLayer(\''+f._key+'\')">🔀 Find Layer</button>';
   h+='</div>';return h;
 }
 
@@ -396,6 +400,12 @@ function showSearchResult(key){
   // Clear active tabs
   document.querySelectorAll('.tab').forEach(function(e){e.classList.remove('active')});
   document.querySelectorAll('.tab-content').forEach(function(e){e.style.display='none'});
+}
+function findLayer(key){
+  switchTab('layer');
+  clearFrag('B');
+  selectFrag('A',key);
+  document.getElementById('tab-layer').scrollIntoView({behavior:'smooth'});
 }
 // Init
 switchTab('brand');
