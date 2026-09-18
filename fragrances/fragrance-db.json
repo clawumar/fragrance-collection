@@ -2,8 +2,8 @@
   "meta": {
     "owner": "Umar",
     "tiktok": "@umarnaq",
-    "lastUpdated": "2026-09-18",
-    "totalFragrances": 94
+    "lastUpdated": "2026-09-19",
+    "totalFragrances": 95
   },
   "fragrances": {
     "persephone": {
@@ -4577,6 +4577,59 @@
       ],
       "notes": "2020 release by Julia Rodriguez Pastor. Bright yuzu-blackcurrant opening with oud-rose-jasmine heart and Kashmir wood-vanilla base. Surprisingly versatile oud.",
       "moods": [
+        "happy-energized",
+        "confident-bold",
+        "romantic-soft",
+        "cozy-comforting"
+      ]
+    },
+    "karus-gold-absolu": {
+      "name": "Karus Gold Absolu",
+      "brand": "Khadlaj",
+      "house": "Khadlaj Perfumes",
+      "year": 2026,
+      "type": "EDP",
+      "gender": "Unisex",
+      "family": "Citrus Gourmand",
+      "topNotes": [
+        "Candied Lemon",
+        "Blackcurrant",
+        "Bergamot"
+      ],
+      "heartNotes": [
+        "Praline",
+        "Magnolia",
+        "Violet"
+      ],
+      "baseNotes": [
+        "Musk",
+        "Vetiver"
+      ],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
+      "longevity": "Good",
+      "sillage": "Moderate",
+      "scentProfile": [
+        "Citrus",
+        "Gourmand",
+        "Floral",
+        "Musky",
+        "Woody"
+      ],
+      "tags": [
+        "citrus",
+        "gourmand",
+        "praline",
+        "floral",
+        "khadlaj",
+        "2026",
+        "unisex"
+      ],
+      "notes": "2026 release. Bright candied lemon-blackcurrant opening with praline-magnolia heart and clean musk-vetiver base. Bal d'Afrique Absolu inspired.",
+      "moods": [
+        "calm-grounded",
         "happy-energized",
         "confident-bold",
         "romantic-soft",
