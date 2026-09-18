@@ -291,10 +291,28 @@ function clearFrag(side){
   document.getElementById('layerScoreBtn').textContent='Select both fragrances';
 }
 function shufflePair(){
-  var i=Math.floor(Math.random()*fragArr.length),j;
-  do{j=Math.floor(Math.random()*fragArr.length)}while(j===i);
-  selectFrag('A',fragArr[i]._key);selectFrag('B',fragArr[j]._key);
-  document.getElementById('tab-layer').scrollIntoView({behavior:'smooth'});
+  var a,b,i,j,stars;
+  for(var tries=0;tries<500;tries++){
+    i=Math.floor(Math.random()*fragArr.length);
+    do{j=Math.floor(Math.random()*fragArr.length)}while(j===i);
+    a=fragArr[i];b=fragArr[j];
+    // Quick score calc
+    var aNts=(a.topNotes||[]).concat(a.heartNotes||[]).concat(a.baseNotes||[]).concat(a.top||[]).concat(a.middle||[]).concat(a.base||[]);
+    var bNts=(b.topNotes||[]).concat(b.heartNotes||[]).concat(b.baseNotes||[]).concat(b.top||[]).concat(b.middle||[]).concat(b.base||[]);
+    var shared=0;aNts.forEach(function(n){if(bNts.some(function(bn){return bn.toLowerCase()===n.toLowerCase()}))shared++});
+    var aSP=(a.scentProfile||[]).map(function(s){return s.toLowerCase()}),bSP=(b.scentProfile||[]).map(function(s){return s.toLowerCase()});
+    var spShared=aSP.filter(function(s){return bSP.indexOf(s)!==-1}).length;
+    var spScore=spShared/Math.max(aSP.length,bSP.length,1);
+    var aSe=(a.season||[]).map(function(s){return s.toLowerCase()}),bSe=(b.season||[]).map(function(s){return s.toLowerCase()});
+    var seShared=aSe.filter(function(s){return bSe.indexOf(s)!==-1}).length;
+    var seScore=seShared/Math.max(aSe.length,bSe.length,1);
+    var noteScore=shared>0?(shared>=3?1:shared>=2?0.8:0.5):0.3;
+    var s=(noteScore*4+spScore*3+seScore*3)/10;
+    stars=Math.max(1,Math.round(s*5));
+    if(stars>=4){selectFrag('A',a._key);selectFrag('B',b._key);scorePair();return}
+  }
+  // Fallback: best pair found
+  selectFrag('A',fragArr[0]._key);selectFrag('B',fragArr[1]._key);scorePair();
 }
 
 function scorePair(){
