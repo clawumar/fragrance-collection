@@ -2,8 +2,8 @@
   "meta": {
     "owner": "Umar",
     "tiktok": "@umarnaq",
-    "lastUpdated": "2026-09-19",
-    "totalFragrances": 95
+    "lastUpdated": "2026-09-29",
+    "totalFragrances": 96
   },
   "fragrances": {
     "persephone": {
@@ -4634,6 +4634,55 @@
         "confident-bold",
         "romantic-soft",
         "cozy-comforting"
+      ]
+    },
+    "nocturno": {
+      "name": "Nocturno",
+      "brand": "Rayhaan",
+      "year": 2025,
+      "type": "EDP",
+      "gender": "Men",
+      "family": "Aromatic Fougère",
+      "topNotes": [
+        "Bergamot",
+        "Pepper",
+        "Mint"
+      ],
+      "heartNotes": [
+        "Lavender",
+        "Pink Pepper",
+        "Geranium"
+      ],
+      "baseNotes": [
+        "Cedar",
+        "Amberwood"
+      ],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
+      "longevity": "Good",
+      "sillage": "Moderate",
+      "scentProfile": [
+        "Fresh",
+        "Aromatic",
+        "Spicy",
+        "Woody"
+      ],
+      "tags": [
+        "rayhaan",
+        "fresh-aromatic",
+        "spicy",
+        "bleu-de-chanel-style",
+        "2025",
+        "men"
+      ],
+      "notes": "2025 release. Fresh aromatic fougère with peppery bergamot-mint opening, lavender heart, and woody cedar-amber base. Leans Bleu de Chanel style.",
+      "moods": [
+        "calm-grounded",
+        "happy-energized",
+        "confident-bold",
+        "romantic-soft"
       ]
     }
   }
