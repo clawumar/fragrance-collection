@@ -2,8 +2,8 @@
   "meta": {
     "owner": "Umar",
     "tiktok": "@umarnaq",
-    "lastUpdated": "2026-10-08",
-    "totalFragrances": 97
+    "lastUpdated": "2026-10-09",
+    "totalFragrances": 99
   },
   "fragrances": {
     "persephone": {
@@ -853,7 +853,7 @@
         "french-avenue",
         "beast-mode"
       ],
-      "notes": "A triple-vanilla Extrait \u2014 Madagascar, Bourbon, and Vanilla Caviar top notes, with chocolate truffle, rum, and oud base. Heavy beast-mode gourmand.",
+      "notes": "A triple-vanilla Extrait — Madagascar, Bourbon, and Vanilla Caviar top notes, with chocolate truffle, rum, and oud base. Heavy beast-mode gourmand.",
       "moods": [
         "confident-bold",
         "romantic-soft",
@@ -2341,7 +2341,7 @@
       ]
     },
     "oud-maracuja": {
-      "name": "Oud Maracuj\u00e1",
+      "name": "Oud Maracujá",
       "brand": "Maison Crivelli",
       "type": "EDP",
       "scentProfile": [
@@ -2386,7 +2386,7 @@
         "unisex",
         "maison-crivelli"
       ],
-      "notes": "A bold niche contrast of juicy passion fruit and smoky oud, created by Jordi Fern\u00e1ndez. Stunning sweet-skanky duality.",
+      "notes": "A bold niche contrast of juicy passion fruit and smoky oud, created by Jordi Fernández. Stunning sweet-skanky duality.",
       "moods": [
         "happy-energized",
         "confident-bold",
@@ -2486,7 +2486,7 @@
         "summer",
         "masculine"
       ],
-      "notes": "A fresh aromatic clone of Louis Vuitton L'Immensit\u00e9 with bright ginger-citrus opening and ambroxan-musk woody base.",
+      "notes": "A fresh aromatic clone of Louis Vuitton L'Immensité with bright ginger-citrus opening and ambroxan-musk woody base.",
       "moods": [
         "calm-grounded",
         "happy-energized",
@@ -3045,7 +3045,7 @@
         "middle-eastern",
         "special-edition"
       ],
-      "notes": "A fresh aromatic foug\u00e8re from Khadlaj Special Edition blending citrus top with herbal lavender-sage heart and woody-amber base.",
+      "notes": "A fresh aromatic fougère from Khadlaj Special Edition blending citrus top with herbal lavender-sage heart and woody-amber base.",
       "moods": [
         "calm-grounded",
         "happy-energized",
@@ -3350,7 +3350,7 @@
       ]
     },
     "oud-nacre": {
-      "name": "Oud Nacr\u00e9",
+      "name": "Oud Nacré",
       "brand": "Giorgio Armani",
       "type": "EDP",
       "scentProfile": [
@@ -3392,7 +3392,7 @@
         "armani-prive",
         "date-night"
       ],
-      "notes": "An exquisite Armani Priv\u00e9 creation combining rare oud with pearlescent rose and warm amber-vanilla for a sophisticated oriental signature.",
+      "notes": "An exquisite Armani Privé creation combining rare oud with pearlescent rose and warm amber-vanilla for a sophisticated oriental signature.",
       "moods": [
         "calm-grounded",
         "happy-energized",
@@ -3402,7 +3402,7 @@
       ]
     },
     "orange-mediterranee": {
-      "name": "Orange M\u00e9diterran\u00e9e",
+      "name": "Orange Méditerranée",
       "brand": "Giorgio Armani",
       "type": "EDT",
       "scentProfile": [
@@ -3443,7 +3443,7 @@
         "daytime",
         "armani-prive"
       ],
-      "notes": "A bright Mediterranean citrus from Armani Priv\u00e9 Les Eaux with warm aromatic dry-down evoking sun-drenched orange groves.",
+      "notes": "A bright Mediterranean citrus from Armani Privé Les Eaux with warm aromatic dry-down evoking sun-drenched orange groves.",
       "moods": [
         "happy-energized",
         "romantic-soft"
@@ -3745,7 +3745,7 @@
         "unisex",
         "summer"
       ],
-      "notes": "LV M\u00e9t\u00e9ore clone. Clean airy citrus-vetiver with spicy heart. 8+ hours. Created by Velixir Parfums.",
+      "notes": "LV Météore clone. Clean airy citrus-vetiver with spicy heart. 8+ hours. Created by Velixir Parfums.",
       "moods": [
         "calm-grounded",
         "happy-energized",
@@ -4321,7 +4321,7 @@
         "Precious Woods",
         "Musk"
       ],
-      "description": "A radiant tropical escape \u2014 Island Sun opens with juicy mango and zesty lime layered over creamy coconut, then blooms into a heart of jasmine and orange blossom with a subtle pink pepper spark. The dry-down settles into warm tonka bean, precious woods, and soft musk.",
+      "description": "A radiant tropical escape — Island Sun opens with juicy mango and zesty lime layered over creamy coconut, then blooms into a heart of jasmine and orange blossom with a subtle pink pepper spark. The dry-down settles into warm tonka bean, precious woods, and soft musk.",
       "moods": [
         "happy-energized",
         "confident-bold",
@@ -4422,7 +4422,7 @@
         "feminine",
         "2026"
       ],
-      "notes": "2026 release by Nisrine Bouazzaoui Grilli\u00e9 & Nad\u00e8ge Le Garlantezec. Luscious gourmand blending passionfruit, creamy frangipani, and vanilla.",
+      "notes": "2026 release by Nisrine Bouazzaoui Grillié & Nadège Le Garlantezec. Luscious gourmand blending passionfruit, creamy frangipani, and vanilla.",
       "moods": [
         "happy-energized",
         "confident-bold",
@@ -4447,7 +4447,7 @@
         "Orange Blossom",
         "Lily-of-the-Valley",
         "Petalia",
-        "Nympheal\u2122",
+        "Nympheal™",
         "Vetiver",
         "Mahonia"
       ],
@@ -4642,7 +4642,7 @@
       "year": 2025,
       "type": "EDP",
       "gender": "Men",
-      "family": "Aromatic Foug\u00e8re",
+      "family": "Aromatic Fougère",
       "topNotes": [
         "Bergamot",
         "Pepper",
@@ -4677,7 +4677,7 @@
         "2025",
         "men"
       ],
-      "notes": "2025 release. Fresh aromatic foug\u00e8re with peppery bergamot-mint opening, lavender heart, and woody cedar-amber base. Leans Bleu de Chanel style.",
+      "notes": "2025 release. Fresh aromatic fougère with peppery bergamot-mint opening, lavender heart, and woody cedar-amber base. Leans Bleu de Chanel style.",
       "moods": [
         "calm-grounded",
         "happy-energized",
@@ -4734,7 +4734,96 @@
         "cold-weather",
         "date-night"
       ],
-      "notes": "A reimagined Tobacco extrait \u2014 sweeter with plum, apple and honey, spicy with pink pepper and labdanum. Rich tobacco-vanilla-sandalwood dry down."
+      "notes": "A reimagined Tobacco extrait — sweeter with plum, apple and honey, spicy with pink pepper and labdanum. Rich tobacco-vanilla-sandalwood dry down."
+    },
+    "paladin-velixir": {
+      "name": "Paladin",
+      "brand": "Velixir",
+      "type": "EDP",
+      "scentProfile": [
+        "Vanilla",
+        "Aromatic",
+        "Woody",
+        "Lavender",
+        "Warm"
+      ],
+      "season": [
+        "Fall",
+        "Spring"
+      ],
+      "topNotes": [
+        "Vanilla"
+      ],
+      "heartNotes": [
+        "Lavender",
+        "Aromatic Notes"
+      ],
+      "baseNotes": [
+        "Vetiver"
+      ],
+      "longevity": "Good",
+      "sillage": "Good",
+      "moods": [
+        "confident-bold",
+        "cozy-comforting"
+      ],
+      "tags": [
+        "velixir",
+        "vanilla",
+        "lavender",
+        "aromatic",
+        "daily-wear",
+        "unisex"
+      ],
+      "notes": "A straightforward daily scent of vanilla, lavender, and woody vetiver. Born in Roma Intense DNA. Perfect everyday scent with good versatility across seasons."
+    },
+    "orion-velixir": {
+      "name": "Orion",
+      "brand": "Velixir",
+      "type": "EDP",
+      "scentProfile": [
+        "Sweet",
+        "Vanilla",
+        "Warm Spicy",
+        "Amber",
+        "Gourmand"
+      ],
+      "season": [
+        "Fall",
+        "Winter"
+      ],
+      "topNotes": [
+        "Bergamot",
+        "Cinnamon"
+      ],
+      "heartNotes": [
+        "Bourbon Vanilla",
+        "Praline",
+        "Ambroxan"
+      ],
+      "baseNotes": [
+        "Woody Notes",
+        "Amber",
+        "Musk",
+        "Heliotrope"
+      ],
+      "longevity": "Excellent",
+      "sillage": "Strong",
+      "moods": [
+        "confident-bold",
+        "cozy-comforting",
+        "romantic-soft"
+      ],
+      "tags": [
+        "velixir",
+        "sweet",
+        "vanilla",
+        "warm-spicy",
+        "gourmand",
+        "date-night",
+        "unisex"
+      ],
+      "notes": "Amber-vanilla fragrance built around bright citrus, warm spice, and creamy gourmand notes. Bergamot and cinnamon create a striking opening, while bourbon vanilla, praline and ambroxan bring a smooth, addictive sweetness. Woody notes, amber, musk, and heliotrope in the base. Crafted by Velixir Parfums (Indonesia)."
     }
   }
 }
